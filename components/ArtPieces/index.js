@@ -1,16 +1,19 @@
 import Image from "next/image";
-import ArtPiecesPreview from "../ArtPiecesPreview";
+import ArtPiecePreview from "../ArtPiecePreview";
+
 
 export default function artPieces({ pieces }) {
+  console.log(pieces.map((artPiece) => artPiece.slug));
+
   return (
     <div>
       <h1>Art Pieces</h1>
       <ul>
         {pieces.map((artPiece) => (
           <li key={artPiece.slug}>
-            <ArtPiecesPreview
+            <ArtPiecePreview
               image={artPiece.imageSource}
-              title={artPiece.name}
+              name={artPiece.name}
               artist={artPiece.artist}
             />
           </li>
