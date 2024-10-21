@@ -5,7 +5,7 @@ const nextConfig = {
   },
   reactStrictMode: true,
   images: {
-    domains: ["example-apis.vercel.app"], // Hinzufügen der Domain hier
+    domains: ["example-apis.vercel.app"],
   },
   webpack(config) {
     config.module.rules.push({
