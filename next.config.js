@@ -4,6 +4,9 @@ const nextConfig = {
     styledComponents: true,
   },
   reactStrictMode: true,
+  images: {
+    domains: ["example-apis.vercel.app"], // Hinzufügen der Domain hier
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
