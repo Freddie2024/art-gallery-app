@@ -1,6 +1,16 @@
 import Image from "next/image";
 import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+  background-color: #ffffff; 
+`;
+
 const ImageContainer = styled.div`
   width: 300px;
   height: 300px;
@@ -44,20 +54,20 @@ const Genre = styled.p`
 
 export default function ArtPieceDetails({ image, name, artist, year, genre }) {
     return (
-      <>
-      <ImageContainer>
-        <StyledImage
-          src={image} 
-          alt={name} 
-          layout="fill" 
-          objectFit="contain" 
-        />     
-      </ImageContainer>
-       <Title>{name}</Title>
-       <Artist>{artist}</Artist>
-       <Year>{year}</Year>
-       <Genre>{genre}</Genre>
-       </>
+      <Container>
+        <ImageContainer>
+            <StyledImage
+            src={image} 
+            alt={name} 
+            layout="fill" 
+            objectFit="contain" 
+            />     
+        </ImageContainer>
+        <Title>{name}</Title>
+        <Artist>{artist}</Artist>
+        <Year>{year}</Year>
+        <Genre>{genre}</Genre>
+       </Container>
     );
   }
 
