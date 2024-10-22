@@ -1,20 +1,19 @@
 import { render } from "@testing-library/react";
-import ArtPiecePreview from ".";
+import Spotlight from ".";
 
-test('renders ArtPiecePreview with image, title, and artist', () => {
+test('renders image and artist', () => {
     const dimensions = { width: 1920, height: 1280 }; 
     const { getByAltText, getByText } = render(
-    <ArtPiecePreview 
+    <Spotlight 
         image="https://example-apis.vercel.app/assets/art/clay-bust-sculptures.jpg" 
-        name="Clay Bust Sculptures" 
         artist="dilara irem"
         dimensions={dimensions}
     />);
     
-    const image = getByAltText('Clay Bust Sculptures');
+    const image = getByAltText('Spotlight: dilara irem');
     expect(image).toHaveAttribute('src', expect.stringContaining(encodeURIComponent('https://example-apis.vercel.app/assets/art/clay-bust-sculptures.jpg'))),
   
-    expect(getByText('Clay Bust Sculptures')).toBeInTheDocument(),
     expect(getByText('dilara irem')).toBeInTheDocument()
 });
-  
+
+
