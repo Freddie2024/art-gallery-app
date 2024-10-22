@@ -1,38 +1,45 @@
 import ArtPiecePreview from "../ArtPiecePreview";
 import Spotlight from "../Spotlight";
-import styled from "styled-components"; 
+import styled from "styled-components";
 
 const ArtPiecesContainer = styled.div`
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
+  flex-direction: column;
+  align-items: center;
 `;
 
 const ArtPieceList = styled.ul`
   display: flex;
-  flex-wrap: wrap; 
-  justify-content: center; 
-  list-style-type: none; 
-  padding: 0; 
-  margin: 20px 0 0; 
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0 0;
 `;
 
 const ArtPieceItem = styled.li`
-  margin: 10px; 
+  margin: 10px;
 `;
 
 export default function ArtPieces({ pieces }) {
-   
+  console.log("Art Pieces:", pieces);
+  console.log(pieces); // Überprüfe, ob 'pieces' korrekt ist
+
   const randomArtPiece = pieces[Math.floor(Math.random() * pieces.length)];
+  console.log("Random Art Piece:", randomArtPiece);
+  if (!randomArtPiece) {
+    return <div>No art piece found</div>; // Rückgabe, wenn kein Kunstwerk gefunden wird
+  }
 
   return (
     <ArtPiecesContainer>
       <h1>Art Pieces</h1>
-      <Spotlight 
+
+      <Spotlight
         image={randomArtPiece.imageSource}
         artist={randomArtPiece.artist}
-        dimensions={randomArtPiece.dimensions}
       />
+
       <ArtPieceList>
         {pieces.map((artPiece) => {
           return (
