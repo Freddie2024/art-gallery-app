@@ -1,17 +1,41 @@
 import Image from "next/image";
+import styled from "styled-components";
 
-export default function Spotlight({ image, artist, dimensions }) {
-    console.log("Dimensions:", dimensions);
+const ImageContainer = styled.div`
+  width: 500px;
+  height: 500px;
+  position: relative;
+  border: 1px solid #ccc;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledImage = styled(Image)`
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+`;
+
+const Artist = styled.p`
+  margin: 0;
+  color: #666; 
+  text-align: center; 
+`;
+
+export default function Spotlight({ image, artist }) {
     return (
-        <div>
-            <Image
+        <ImageContainer>
+            <StyledImage
                 src={image}
                 alt={`Spotlight: ${artist}`}
-                layout="responsive"
-                width={dimensions.width}
-                height={dimensions.height}
+                layout="fill" 
+                objectFit="contain" 
             />
-            <h2>{artist}</h2>
-        </div>
+            <Artist>{artist}</Artist>
+        </ImageContainer>
     );
 }
+
