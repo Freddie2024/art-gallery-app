@@ -27,6 +27,7 @@ const Artist = styled.p`
 
 export default function Spotlight({ image, artist }) {
     return (
+        <>
         <ImageContainer>
             <StyledImage
                 src={image}
@@ -34,8 +35,9 @@ export default function Spotlight({ image, artist }) {
                 layout="fill" 
                 objectFit="contain" 
             />
-            <Artist>{artist}</Artist>
         </ImageContainer>
+        <Artist>{artist}</Artist>
+        </>
     );
 }
 
