@@ -1,36 +1,6 @@
 
 import { useRouter } from "next/router.js";
 import ArtPieceDetails from "@/components/ArtPieceDetails";
-import styled from "styled-components";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: #f8f9fa; 
-  min-height: 100vh; 
-`;
-
-const Button = styled.button`
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #0056b3; 
-  color: white; 
-  border: none; 
-  border-radius: 5px; 
-  font-size: 1em; 
-  cursor: pointer; 
-  transition: background-color 0.3s; 
-  
-  &:hover {
-    background-color: #5a6268; 
-  }
-
-  &:focus {
-    outline: none; 
-  }
-`;
 
 const mockArtPieces = [
     {
@@ -110,17 +80,16 @@ export default function ArtPieceDetailsPage() {
   }
 
   return (
-    <Container>
+   
         <ArtPieceDetails 
             image={artPiece.imageSource} 
             name={artPiece.name} 
             artist={artPiece.artist} 
             year={artPiece.year} 
             genre={artPiece.genre} 
-        />
-        <Button onClick={() => router.back()}>Back</Button>
-    </Container>
-  );
+            onBack={() => router.back()}
+        />    
+    );
 }
 
 
