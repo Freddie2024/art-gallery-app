@@ -86,8 +86,8 @@ export default function ArtPieceDetails({ image, name, artist, year, genre }) {
             <StyledImage
             src={image} 
             alt={name} 
-            layout="fill" 
-            objectFit="contain" 
+            fill
+            style={{ objectFit: 'contain' }} 
             />     
         </ImageContainer>
         <Title>{name}</Title>

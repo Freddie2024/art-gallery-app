@@ -37,8 +37,8 @@ export default function ArtPiecePreview({ image, name, artist }) {
       <StyledImage
         src={image} 
         alt={name} 
-        layout="fill" 
-        objectFit="contain" 
+        fill
+        style={{ objectFit: 'contain' }} 
       />     
     </ImageContainer>
      <Title>{name}</Title>

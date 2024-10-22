@@ -32,8 +32,8 @@ export default function Spotlight({ image, artist }) {
             <StyledImage
                 src={image}
                 alt={`Spotlight: ${artist}`}
-                layout="fill" 
-                objectFit="contain" 
+                fill
+                style={{ objectFit: 'contain' }} 
             />
         </ImageContainer>
         <Artist>{artist}</Artist>
