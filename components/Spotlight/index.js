@@ -26,18 +26,17 @@ const Artist = styled.p`
 `;
 
 export default function Spotlight({ image, artist }) {
-    return (
-        <>
-        <ImageContainer>
-            <StyledImage
-                src={image}
-                alt={`Spotlight: ${artist}`}
-                fill
-                sizes="(max-width: 500px) 100vw, 500px" 
-            />
-        </ImageContainer>
-        <Artist>{artist}</Artist>
-        </>
-    );
+  return (
+    <>
+      <ImageContainer>
+        <StyledImage
+          src={image}
+          alt={`Spotlight: ${artist}`}
+          fill
+          sizes="(max-width: 500px) 100vw, 500px"
+        />
+      </ImageContainer>
+      <Artist>{artist}</Artist>
+    </>
+  );
 }
-

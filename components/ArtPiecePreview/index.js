@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 
 const ImageContainer = styled.div`
@@ -21,30 +22,28 @@ const StyledImage = styled(Image)`
 
 const Title = styled.h3`
   margin: 10px 0 0;
-  text-align: center; 
+  text-align: center;
 `;
 
 const Artist = styled.p`
   margin: 0;
-  color: #666; 
-  text-align: center; 
+  color: #666;
+  text-align: center;
 `;
 
-export default function ArtPiecePreview({ image, name, artist }) {
+export default function ArtPiecePreview({ image, name, artist, slug }) {
   return (
-    <>
-    <ImageContainer>
-      <StyledImage
-        src={image} 
-        alt={name} 
-        fill
-        style={{ objectFit: 'contain' }} 
-      />     
-    </ImageContainer>
-     <Title>{name}</Title>
-     <Artist>{artist}</Artist>
-     </>
+    <Link href={`/art-pieces/${slug}`}>
+      <ImageContainer>
+        <StyledImage
+          src={image}
+          alt={name}
+          fill
+          style={{ objectFit: "contain" }}
+        />
+      </ImageContainer>
+      <Title>{name}</Title>
+      <Artist>{artist}</Artist>
+    </Link>
   );
 }
-
-
