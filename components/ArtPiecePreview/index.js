@@ -1,6 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+import FavoriteButton from "../FavoriteButton";
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
 
 const ImageContainer = styled.div`
   width: 300px;
@@ -31,9 +45,10 @@ const Artist = styled.p`
   text-align: center;
 `;
 
-export default function ArtPiecePreview({ image, name, artist, slug }) {
+export default function ArtPiecePreview({ image, name, artist, slug, isFavorite, onToggleFavorite }) {
   return (
     <Link href={`/art-pieces/${slug}`}>
+      <Wrapper>
       <ImageContainer>
         <StyledImage
           src={image}
@@ -44,6 +59,12 @@ export default function ArtPiecePreview({ image, name, artist, slug }) {
       </ImageContainer>
       <Title>{name}</Title>
       <Artist>{artist}</Artist>
+      <FavoriteButton
+            id={slug}
+            isFavorite={isFavorite}
+            onToggleFavorite={onToggleFavorite}
+          />
+          </Wrapper>
     </Link>
   );
 }
