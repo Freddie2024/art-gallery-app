@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
+import FavoriteButton from "../FavoriteButton";
 
 
 const Container = styled.div`
@@ -79,7 +80,7 @@ const onBack = () => {
     router.back(); 
   };
 
-export default function ArtPieceDetails({ image, name, artist, year, genre }) {
+export default function ArtPieceDetails({ image, name, artist, year, genre, slug, isFavorite, onToggleFavorite }) {
     return (
       <Container>
         <ImageContainer>
@@ -94,6 +95,11 @@ export default function ArtPieceDetails({ image, name, artist, year, genre }) {
         <Artist>{artist}</Artist>
         <Year>{year}</Year>
         <Genre>{genre}</Genre>
+        <FavoriteButton
+            id={slug}
+            isFavorite={isFavorite}
+            onToggleFavorite={onToggleFavorite}
+          />
         <Button type="button" onClick={onBack} aria-label="navigate back">Back</Button>
     </Container>
     );
