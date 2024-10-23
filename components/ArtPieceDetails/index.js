@@ -7,15 +7,19 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  max-width: 500px; 
+  max-width: 90%;
   margin: 20px auto; 
   border-radius: 10px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
   background-color: #ffffff;
+
+  @media (min-width: 768px) {
+    max-width: 500px; 
+  }
 `;
 
 const ImageContainer = styled.div`
-  width: 400px;
+  width: 100%;
   height: 400px;
   position: relative;
   border: 1px solid #ccc;
@@ -86,8 +90,8 @@ export default function ArtPieceDetails({ image, name, artist, year, genre }) {
             <StyledImage
             src={image} 
             alt={name} 
-            layout="fill" 
-            objectFit="contain" 
+            fill
+            style={{ objectFit: 'contain' }} 
             />     
         </ImageContainer>
         <Title>{name}</Title>
