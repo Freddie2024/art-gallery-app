@@ -21,8 +21,8 @@ const StyledImage = styled(Image)`
 
 const Artist = styled.p`
   margin: 0;
-  color: #666; 
-  text-align: center; 
+  color: #666;
+  text-align: center;
 `;
 
 export default function Spotlight({ image, artist }) {
@@ -33,7 +33,7 @@ export default function Spotlight({ image, artist }) {
                 src={image}
                 alt={`Spotlight: ${artist}`}
                 fill
-                style={{ objectFit: 'contain' }} 
+                sizes="(max-width: 500px) 100vw, 500px" 
             />
         </ImageContainer>
         <Artist>{artist}</Artist>
