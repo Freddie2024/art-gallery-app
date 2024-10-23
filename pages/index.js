@@ -1,36 +1,9 @@
-import useSWR from "swr";
-import ArtPieces from "../components/ArtPieces";
+import Spotlight from "@/components/Spotlight";
 
-const fetcher = (...pieces) => fetch(...pieces).then((res) => res.json());
-
-export default function HomePage() {
-  const { data, error } = useSWR(
-    "https://example-apis.vercel.app/api/art",
-    fetcher
-  );
-
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-
+export default function SpotlightPage({ artPieces }) {
   return (
     <>
-      <ArtPieces pieces={data} />
+      <Spotlight pieces={artPieces} />
     </>
   );
 }
-
-/* <div>
-      <h1>Art Pieces</h1>
-      <ul>
-        {data.map((artPiece) => (
-          <li key={artPiece.slug}>
-            <h2>{artPiece.name}</h2>
-            <p>Artist: {artPiece.artist}</p>
-            <p>Year: {artPiece.year}</p>
-            <p>Genre: {artPiece.genre}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}*/
