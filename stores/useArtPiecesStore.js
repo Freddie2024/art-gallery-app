@@ -1,4 +1,3 @@
-import ArtPieces from "@/components/ArtPieces";
 import { create } from "zustand";
 
 const useArtPiecesStore = create((set) => ({
