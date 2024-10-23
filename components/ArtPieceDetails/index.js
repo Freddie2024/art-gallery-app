@@ -79,11 +79,7 @@ const Button = styled.button`
   }
 `;
 
-const onBack = () => {
-    router.back(); 
-  };
-
-export default function ArtPieceDetails({ image, name, artist, year, genre }) {
+export default function ArtPieceDetails({ image, name, artist, year, genre, onBack }) {
     return (
       <Container>
         <ImageContainer>
@@ -98,7 +94,7 @@ export default function ArtPieceDetails({ image, name, artist, year, genre }) {
         <Artist>{artist}</Artist>
         <Year>{year}</Year>
         <Genre>{genre}</Genre>
-        <Button type="button" onClick={onBack} aria-label="navigate back">Back</Button>
+        <Button onClick={onBack} aria-label="navigate back">Back</Button>
     </Container>
     );
   }

@@ -18,6 +18,10 @@ export default function ArtPieceDetailsPage() {
     return <p>No art piece found</p>;
   }
 
+  const onBack = () => {
+    router.back(); 
+  };
+
   return (
    
         <ArtPieceDetails 
@@ -26,7 +30,7 @@ export default function ArtPieceDetailsPage() {
             artist={artPiece.artist} 
             year={artPiece.year} 
             genre={artPiece.genre} 
-            onBack={() => router.back()}
+            onBack={onBack}
         />    
     );
 }
