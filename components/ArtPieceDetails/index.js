@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
+import FavoriteButton from "../FavoriteButton";
 
 
 const Container = styled.div`
@@ -79,7 +80,8 @@ const Button = styled.button`
   }
 `;
 
-export default function ArtPieceDetails({ image, name, artist, year, genre, onBack }) {
+export default function ArtPieceDetails({ image, name, artist, year, genre, onBack, slug, isFavorite, onToggleFavorite }) {
+
     return (
       <Container>
         <ImageContainer>
@@ -94,6 +96,11 @@ export default function ArtPieceDetails({ image, name, artist, year, genre, onBa
         <Artist>{artist}</Artist>
         <Year>{year}</Year>
         <Genre>{genre}</Genre>
+        <FavoriteButton
+            id={slug}
+            isFavorite={isFavorite}
+            onToggleFavorite={onToggleFavorite}
+          />
         <Button onClick={onBack} aria-label="navigate back">Back</Button>
     </Container>
     );
