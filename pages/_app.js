@@ -15,7 +15,10 @@ export default function App({ Component, pageProps }) {
     fetcher
   );
 
-  const [artPiecesInfo, setArtPiecesInfo] = useImmerLocalStorageState("artpieces-info", { default:[]});
+  const [artPiecesInfo, setArtPiecesInfo] = useImmerLocalStorageState(
+    "artpieces-info",
+    { default: [] }
+  );
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading art pieces...</div>;
@@ -24,7 +27,7 @@ export default function App({ Component, pageProps }) {
 
   setArtPieces(data);
   // updates the 'artPieces' state in the Zustand store with the newly fetched data.
-  
+
   function handleToggleFavorite(slug) {
     const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
     if (artPiece) {
@@ -39,12 +42,12 @@ export default function App({ Component, pageProps }) {
       setArtPiecesInfo([...artPiecesInfo, { slug, isFavorite: true }]);
     }
   }
-  
+
   return (
     <>
       <GlobalStyle />
       <Layout>
-        <Component {...pageProps} artPieces={data} />
+        <Component {...pageProps} pieces={data} />
       </Layout>
     </>
   );

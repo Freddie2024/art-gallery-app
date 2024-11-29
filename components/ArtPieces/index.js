@@ -22,11 +22,15 @@ const ArtPieceItem = styled.li`
 `;
 
 export default function ArtPieces({ pieces }) {
+  if (!pieces) {
+    return <div>Loading...</div>;
+  }
 
   const randomArtPiece = pieces[Math.floor(Math.random() * pieces.length)];
   console.log("Random Art Piece:", randomArtPiece);
+
   if (!randomArtPiece) {
-    return <div>No art piece found</div>; 
+    return <div>No art piece found</div>;
   }
 
   return (
