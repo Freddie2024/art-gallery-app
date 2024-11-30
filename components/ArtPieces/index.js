@@ -26,22 +26,9 @@ export default function ArtPieces({ pieces }) {
     return <div>Loading...</div>;
   }
 
-  const randomArtPiece = pieces[Math.floor(Math.random() * pieces.length)];
-  console.log("Random Art Piece:", randomArtPiece);
-
-  if (!randomArtPiece) {
-    return <div>No art piece found</div>;
-  }
-
   return (
     <ArtPiecesContainer>
-      <h1>Art Pieces</h1>
-
-      <Spotlight
-        image={randomArtPiece.imageSource}
-        artist={randomArtPiece.artist}
-      />
-
+      <h1>All Art Pieces</h1>
       <ArtPieceList>
         {pieces.map((artPiece) => {
           return (
