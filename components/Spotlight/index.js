@@ -7,13 +7,13 @@ const Container = styled.div`
   align-items: center;
   padding: 20px;
   max-width: 90%;
-  margin: 20px auto; 
-  border-radius: 10px; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
 
   @media (min-width: 768px) {
-    max-width: 500px; 
+    max-width: 500px;
   }
 `;
 
@@ -42,17 +42,17 @@ const Artist = styled.p`
 `;
 
 export default function Spotlight({ image, artist }) {
-    return (
-        <Container>
-        <ImageContainer>
-            <StyledImage
-                src={image}
-                alt={`Spotlight: ${artist}`}
-                fill
-                sizes="(max-width: 500px) 100vw, 500px" 
-            />
-        </ImageContainer>
-        <Artist>{artist}</Artist>
-        </Container>
-    );
+  return (
+    <Container>
+      <ImageContainer>
+        <StyledImage
+          src={image}
+          alt={`Spotlight: ${artist}`}
+          fill
+          sizes="(max-width: 500px) 100vw, 500px"
+        />
+      </ImageContainer>
+      <Artist>{artist}</Artist>
+    </Container>
+  );
 }

@@ -1,5 +1,4 @@
 import ArtPiecePreview from "../ArtPiecePreview";
-import Spotlight from "../Spotlight";
 import styled from "styled-components";
 
 const ArtPiecesContainer = styled.div`

@@ -45,26 +45,42 @@ const Artist = styled.p`
   text-align: center;
 `;
 
-export default function ArtPiecePreview({ image, name, artist, slug, isFavorite, onToggleFavorite }) {
+const StyledLink = styled.a`
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  width: 100%;
+`;
+
+export default function ArtPiecePreview({
+  image,
+  name,
+  artist,
+  slug,
+  isFavorite,
+  onToggleFavorite,
+}) {
   return (
     <Link href={`/art-pieces/${slug}`}>
-      <Wrapper>
-      <ImageContainer>
-        <StyledImage
-          src={image}
-          alt={name}
-          fill
-          style={{ objectFit: "contain" }}
-        />
-      </ImageContainer>
-      <Title>{name}</Title>
-      <Artist>{artist}</Artist>
-      <FavoriteButton
+      <StyledLink>
+        <Wrapper>
+          <ImageContainer>
+            <StyledImage
+              src={image}
+              alt={name}
+              fill
+              style={{ objectFit: "contain" }}
+            />
+          </ImageContainer>
+          <Title>{name}</Title>
+          <Artist>{artist}</Artist>
+          <FavoriteButton
             id={slug}
             isFavorite={isFavorite}
             onToggleFavorite={onToggleFavorite}
           />
-          </Wrapper>
+        </Wrapper>
+      </StyledLink>
     </Link>
   );
 }
