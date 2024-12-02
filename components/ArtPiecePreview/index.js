@@ -1,7 +1,9 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
+import useArtPiecesStore from "@/stores/useArtPiecesStore";
 
 const Wrapper = styled.div`
   display: flex;
@@ -45,42 +47,39 @@ const Artist = styled.p`
   text-align: center;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
   display: inline-block;
-  width: 100%;
 `;
 
-export default function ArtPiecePreview({
-  image,
-  name,
-  artist,
-  slug,
-  isFavorite,
-  onToggleFavorite,
-}) {
+export default function ArtPiecePreview({ image, name, artist, slug }) {
+  const { favorites, toggleFavorite } = useArtPiecesStore();
+  const isFavorite = favorites.includes(slug);
+
   return (
-    <Link href={`/art-pieces/${slug}`}>
-      <StyledLink>
-        <Wrapper>
-          <ImageContainer>
-            <StyledImage
-              src={image}
-              alt={name}
-              fill
-              style={{ objectFit: "contain" }}
-            />
-          </ImageContainer>
-          <Title>{name}</Title>
-          <Artist>{artist}</Artist>
-          <FavoriteButton
-            id={slug}
-            isFavorite={isFavorite}
-            onToggleFavorite={onToggleFavorite}
+    <Wrapper>
+      <StyledLink href={`/art-pieces/${slug}`} passHref>
+        <ImageContainer>
+          <StyledImage
+            src={image}
+            alt={name}
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
+            style={{ objectFit: "contain" }}
           />
-        </Wrapper>
+        </ImageContainer>
+        <Title>{name}</Title>
+        <Artist>{artist}</Artist>
       </StyledLink>
-    </Link>
+      <FavoriteButton
+        id={slug}
+        isFavorite={isFavorite}
+        onToggleFavorite={() => {
+          toggleFavorite(slug);
+        }}
+      />
+    </Wrapper>
   );
 }

@@ -13,7 +13,7 @@ const Container = styled.div`
   background-color: #ffffff;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   position: relative;
   padding: 10px 20px;
   font-size: 16px;
@@ -34,12 +34,8 @@ export default function Navigation() {
   return (
     <nav>
       <Container>
-        <Link href="/">
-          <StyledLink> Spotlight Piece </StyledLink>
-        </Link>
-        <Link href="/art-pieces">
-          <StyledLink> All Art Pieces </StyledLink>
-        </Link>
+        <StyledLink href="/"> Spotlight Piece </StyledLink>
+        <StyledLink href="/art-pieces"> All Art Pieces </StyledLink>
       </Container>
     </nav>
   );

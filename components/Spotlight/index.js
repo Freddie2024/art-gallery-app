@@ -1,5 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
+import FavoriteButton from "../FavoriteButton";
+import useArtPiecesStore from "@/stores/useArtPiecesStore";
 
 const Container = styled.div`
   display: flex;
@@ -41,7 +43,9 @@ const Artist = styled.p`
   text-align: center;
 `;
 
-export default function Spotlight({ image, artist }) {
+export default function Spotlight({ image, artist, slug }) {
+  const { favorites, toggleFavorite } = useArtPiecesStore();
+  const isFavorite = favorites.includes(slug);
   return (
     <Container>
       <ImageContainer>
@@ -49,10 +53,17 @@ export default function Spotlight({ image, artist }) {
           src={image}
           alt={`Spotlight: ${artist}`}
           fill
+          priority
           sizes="(max-width: 500px) 100vw, 500px"
         />
       </ImageContainer>
       <Artist>{artist}</Artist>
+      <FavoriteButton
+        isFavorite={isFavorite}
+        onToggleFavorite={() => {
+          toggleFavorite(slug);
+        }}
+      />
     </Container>
   );
 }
