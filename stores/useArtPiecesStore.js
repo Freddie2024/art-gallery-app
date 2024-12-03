@@ -2,16 +2,17 @@ import { create } from "zustand";
 
 const useArtPiecesStore = create((set) => ({
   artPieces: [],
-  favorites: [],
+  artPiecesInfo: [],
   setArtPieces: (newPieces) => set({ artPieces: newPieces }),
+  setArtPiecesInfo: (newInfo) => set({ artPiecesInfo: newInfo }),
   toggleFavorite: (slug) =>
     set((state) => {
-      const isFavorite = state.favorites.includes(slug);
-      return {
-        favorites: isFavorite
-          ? state.favorites.filter((s) => s !== slug)
-          : [...state.favorites, slug],
-      };
+      const updatedInfo = state.artPiecesInfo.map((piece) =>
+        piece.slug === slug
+          ? { ...piece, isFavorite: !piece.isFavorite }
+          : piece
+      );
+      return { artPiecesInfo: updatedInfo };
     }),
 }));
 

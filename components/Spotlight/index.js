@@ -44,8 +44,9 @@ const Artist = styled.p`
 `;
 
 export default function Spotlight({ image, artist, slug }) {
-  const { favorites, toggleFavorite } = useArtPiecesStore();
-  const isFavorite = favorites.includes(slug);
+  const { artPiecesInfo, toggleFavorite } = useArtPiecesStore();
+  const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
+  const isFavorite = artPiece ? artPiece.isFavorite : false;
   return (
     <Container>
       <ImageContainer>
