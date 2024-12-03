@@ -1,12 +1,16 @@
 import GlobalStyle from "../styles";
 import useSWR from "swr";
-import useArtPiecesStore from "@/stores/useArtPiecesStore";
+import useArtPiecesStore, {
+  useLoadFavorites,
+} from "@/stores/useArtPiecesStore";
 import Layout from "@/components/Layout";
 import { useEffect } from "react";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function App({ Component, pageProps }) {
+  useLoadFavorites();
+
   const setArtPiecesInfo = useArtPiecesStore((state) => state.setArtPiecesInfo);
 
   const { data, error } = useSWR(

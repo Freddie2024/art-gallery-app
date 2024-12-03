@@ -1,14 +1,17 @@
 import useArtPiecesStore from "@/stores/useArtPiecesStore";
-import ArtPiecePreview from "@/components/ArtPiecePreview";
+import ArtPieces from "@/components/ArtPieces";
 
 export default function FavoritesPage() {
-  const { artPiecesInfo } = useArtPiecesStore();
-  const favoritePieces = artPiecesInfo.filter((piece) => piece.isFavorite);
+  const { artPiecesInfo, favorites } = useArtPiecesStore();
+  const favoritePieces = artPiecesInfo.filter((piece) =>
+    favorites.includes(piece.slug)
+  );
 
   return (
     <div>
-      <h1>Your Favorites</h1>
-      {favoritePieces.length > 0 ? (
+      <ArtPieces pieces={favoritePieces} title="Your Favorites" />
+      {/* Pass the favorite pieces as a prop */}
+      {/* {favoritePieces.length > 0 ? (
         favoritePieces.map((piece) => (
           <ArtPiecePreview
             key={piece.slug}
@@ -20,7 +23,7 @@ export default function FavoritesPage() {
         ))
       ) : (
         <p>No favorites yet!</p>
-      )}
+      )} */}
     </div>
   );
 }
