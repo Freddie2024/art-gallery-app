@@ -36,6 +36,7 @@ export default function Navigation() {
       <Container>
         <StyledLink href="/"> Spotlight Piece </StyledLink>
         <StyledLink href="/art-pieces"> All Art Pieces </StyledLink>
+        <StyledLink href="/favorites"> Your Favorites </StyledLink>
       </Container>
     </nav>
   );
