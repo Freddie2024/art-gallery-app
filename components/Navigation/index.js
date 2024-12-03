@@ -6,7 +6,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: 5px;
-  width: 305px;
+  width: 320px;
   margin: 20px auto;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -34,8 +34,9 @@ export default function Navigation() {
   return (
     <nav>
       <Container>
-        <StyledLink href="/"> Spotlight Piece </StyledLink>
-        <StyledLink href="/art-pieces"> All Art Pieces </StyledLink>
+        <StyledLink href="/"> Spotlight </StyledLink>
+        <StyledLink href="/art-pieces"> Show All </StyledLink>
+        <StyledLink href="/favorites"> Favorites </StyledLink>
       </Container>
     </nav>
   );

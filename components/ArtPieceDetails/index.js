@@ -90,9 +90,9 @@ export default function ArtPieceDetails({
   onBack,
   slug,
 }) {
-  const { favorites, toggleFavorite } = useArtPiecesStore();
-  const isFavorite = favorites.includes(slug);
-
+  const { artPiecesInfo, toggleFavorite } = useArtPiecesStore();
+  const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
+  const isFavorite = artPiece ? artPiece.isFavorite : false;
   return (
     <Container>
       <ImageContainer>

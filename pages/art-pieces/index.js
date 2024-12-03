@@ -1,9 +1,12 @@
 import ArtPieces from "@/components/ArtPieces";
+import useArtPiecesStore from "@/stores/useArtPiecesStore";
 
-export default function ArtPiecesPage({ pieces }) {
+export default function ArtPiecesPage() {
+  const { artPiecesInfo } = useArtPiecesStore();
+
   return (
     <>
-      <ArtPieces pieces={pieces} />
+      <ArtPieces pieces={artPiecesInfo} title="All Art Pieces" />
     </>
   );
 }

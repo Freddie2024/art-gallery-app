@@ -20,14 +20,18 @@ const ArtPieceItem = styled.li`
   margin: 10px;
 `;
 
-export default function ArtPieces({ pieces }) {
-  if (!pieces) {
-    return <div>Loading...</div>;
-  }
+const Title = styled.h1`
+  text-align: center;
+`;
+
+export default function ArtPieces({ pieces, title }) {
+  // if (!pieces) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <ArtPiecesContainer>
-      <h1>All Art Pieces</h1>
+      <Title>{title}</Title>
       <ArtPieceList>
         {pieces.map((artPiece) => {
           return (

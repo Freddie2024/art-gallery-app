@@ -16,10 +16,17 @@ describe("Navigation Component", () => {
     expect(spotlightLink).toBeInTheDocument();
   });
 
-  test('The "Pieces"-Link is displayed', () => {
+  test('The "Show All"-Link is displayed', () => {
     render(<Navigation />);
 
-    const piecesLink = screen.getByRole("link", { name: /pieces/i });
-    expect(piecesLink).toBeInTheDocument();
+    const showAllLink = screen.getByRole("link", { name: /show all/i });
+    expect(showAllLink).toBeInTheDocument();
+  });
+
+  test('The "Favorites"-Link is displayed', () => {
+    render(<Navigation />);
+
+    const favoritesLink = screen.getByRole("link", { name: /favorites/i });
+    expect(favoritesLink).toBeInTheDocument();
   });
 });
