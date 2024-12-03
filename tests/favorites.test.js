@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
-import FavoritesPage from ".";
-import useArtPiecesStore from "../../stores/useArtPiecesStore";
-import FavoriteButton from "../../components/FavoriteButton";
+import FavoritesPage from "../pages/favorites";
+import useArtPiecesStore from "../stores/useArtPiecesStore";
+import FavoriteButton from "../components/FavoriteButton";
 
-jest.mock("../../stores/useArtPiecesStore");
+jest.mock("../stores/useArtPiecesStore");
 
-jest.mock("../../components/FavoriteButton", () => {
+jest.mock("../components/FavoriteButton", () => {
   return function MockFavoriteButton({ isFavorite, onToggleFavorite }) {
     return (
       <button onClick={onToggleFavorite}>
