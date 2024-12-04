@@ -20,7 +20,15 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     if (data) {
-      setArtPiecesInfo(data);
+      const storedFavorites =
+        JSON.parse(localStorage.getItem("favorites")) || [];
+
+      const updatedData = data.map((piece) => ({
+        ...piece,
+        isFavorite: storedFavorites.includes(piece.slug),
+      }));
+
+      setArtPiecesInfo(updatedData);
     }
   }, [data, setArtPiecesInfo]);
 
