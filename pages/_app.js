@@ -12,6 +12,7 @@ export default function App({ Component, pageProps }) {
   useLoadFavorites();
 
   const setArtPiecesInfo = useArtPiecesStore((state) => state.setArtPiecesInfo);
+  // const setArtPieces = useArtPiecesStore((state) => state.setArtPieces);
 
   const { data, error } = useSWR(
     "https://example-apis.vercel.app/api/art",
@@ -28,6 +29,7 @@ export default function App({ Component, pageProps }) {
         isFavorite: storedFavorites.includes(piece.slug),
       }));
 
+      // setArtPieces(updatedData);
       setArtPiecesInfo(updatedData);
     }
   }, [data, setArtPiecesInfo]);

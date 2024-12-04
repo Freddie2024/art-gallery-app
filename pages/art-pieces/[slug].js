@@ -6,17 +6,20 @@ export default function ArtPieceDetailsPage() {
   const router = useRouter();
   const { slug } = router.query;
 
-  const artPieces = useArtPiecesStore((state) => state.artPieces);
+  const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
+
+  console.log("Slug:", slug);
+  console.log("Art Pieces Info:", artPiecesInfo);
 
   if (!router.isReady) {
     return <p>Loading...</p>;
   }
 
-  if (!artPieces) {
+  if (!artPiecesInfo || artPiecesInfo.length === 0) {
     return <p>No art pieces available</p>;
   }
 
-  const artPiece = artPieces.find((piece) => piece.slug === slug);
+  const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
 
   if (!artPiece) {
     return <p>No art piece found</p>;

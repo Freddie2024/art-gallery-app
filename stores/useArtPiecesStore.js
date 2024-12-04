@@ -3,11 +3,9 @@ import { useEffect } from "react";
 
 const useArtPiecesStore = create((set) => {
   return {
-    artPieces: [],
     artPiecesInfo: [],
     favorites: [],
 
-    setArtPieces: (newPieces) => set({ artPieces: newPieces }),
     setArtPiecesInfo: (newInfo) => set({ artPiecesInfo: newInfo }),
     setFavorites: (newFavorites) => set({ favorites: newFavorites }),
 
