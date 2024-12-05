@@ -8,6 +8,10 @@ const ArtPieceContainer = styled.div`
 `;
 
 export default function SpotlightPage({ pieces }) {
+  if (!Array.isArray(pieces) || pieces.length === 0) {
+    console.error("No art pieces available:", pieces);
+    return <p>No art pieces available</p>;
+  }
   const randomArtPiece = pieces[Math.floor(Math.random() * pieces.length)];
 
   return (

@@ -25,10 +25,10 @@ const Title = styled.h1`
 `;
 
 export default function ArtPieces({ pieces, title }) {
-  // if (!pieces) {
-  //   return <div>Loading...</div>;
-  // }
-
+  if (!Array.isArray(pieces)) {
+    console.error("pieces is not an array:", pieces);
+    return <p>No art pieces available</p>;
+  }
   return (
     <ArtPiecesContainer>
       <Title>{title}</Title>

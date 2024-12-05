@@ -1,46 +1,46 @@
 import { create } from "zustand";
-import { useEffect } from "react";
+import { persist } from "zustand/middleware";
 
-const useArtPiecesStore = create((set) => {
-  return {
-    artPieces: [],
-    artPiecesInfo: [],
-    favorites: [],
+const useArtPiecesStore = create(
+  persist(
+    (set) => ({
+      artPiecesInfo: [],
+      favorites: [],
+      comments: {},
 
-    setArtPieces: (newPieces) => set({ artPieces: newPieces }),
-    setArtPiecesInfo: (newInfo) => set({ artPiecesInfo: newInfo }),
-    setFavorites: (newFavorites) => set({ favorites: newFavorites }),
+      setArtPiecesInfo: (newInfo) => {
+        set({ artPiecesInfo: newInfo });
+      },
 
-    toggleFavorite: (slug) =>
-      set((state) => {
-        const updatedInfo = state.artPiecesInfo.map((piece) =>
-          piece.slug === slug
-            ? { ...piece, isFavorite: !piece.isFavorite }
-            : piece
-        );
+      addComment: (slug, comment) => {
+        set((state) => {
+          const existingComments = state.comments[slug] || [];
 
-        const isFavorite = state.favorites.includes(slug);
-        const updatedFavorites = isFavorite
-          ? state.favorites.filter((s) => s !== slug)
-          : [...state.favorites, slug];
+          const updatedComments = {
+            ...state.comments,
+            [slug]: [...existingComments, comment],
+          };
 
-        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+          return {
+            comments: updatedComments,
+          };
+        });
+      },
 
-        return { artPiecesInfo: updatedInfo, favorites: updatedFavorites };
-      }),
-  };
-});
-
-export const useLoadFavorites = () => {
-  const setFavorites = useArtPiecesStore((state) => state.setFavorites);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedFavorites =
-        JSON.parse(localStorage.getItem("favorites")) || [];
-      setFavorites(storedFavorites);
+      toggleFavorite: (slug) =>
+        set((state) => {
+          const isFavorite = state.favorites.includes(slug);
+          const updatedFavorites = isFavorite
+            ? state.favorites.filter((s) => s !== slug)
+            : [...state.favorites, slug];
+          return { favorites: updatedFavorites };
+        }),
+    }),
+    {
+      name: "art-pieces-store",
+      partialize: (state) => ({ favorites: state.favorites }),
     }
-  }, [setFavorites]);
-};
+  )
+);
 
 export default useArtPiecesStore;

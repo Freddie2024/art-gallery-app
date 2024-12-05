@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ArtPieces from ".";
 import React from "react";
+import Image from "next/image";
 
 jest.mock("next/link", () => {
   return function Link({ href, children }) {
@@ -11,7 +12,7 @@ jest.mock("../Spotlight", () => () => null);
 jest.mock("next/image", () => ({
   __esModule: true,
   default: ({ src, alt, ...props }) => {
-    return <img src={src} alt={alt} {...props} />;
+    return <Image src={src} alt={alt} {...props} />;
   },
 }));
 test("renders a list of art pieces", () => {

@@ -6,19 +6,26 @@ export default function ArtPieceDetailsPage() {
   const router = useRouter();
   const { slug } = router.query;
 
-  const artPieces = useArtPiecesStore((state) => state.artPieces);
+  const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
 
   if (!router.isReady) {
     return <p>Loading...</p>;
   }
 
-  if (!artPieces) {
+  if (!slug) {
+    console.error("Slug is undefined");
+    return <p>Error: No slug provided.</p>;
+  }
+
+  if (!Array.isArray(artPiecesInfo) || artPiecesInfo.length === 0) {
+    console.error("artPiecesInfo is not an array or is empty:", artPiecesInfo);
     return <p>No art pieces available</p>;
   }
 
-  const artPiece = artPieces.find((piece) => piece.slug === slug);
+  const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
 
   if (!artPiece) {
+    console.error("Art piece not found for slug:", slug);
     return <p>No art piece found</p>;
   }
 
