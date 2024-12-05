@@ -6,8 +6,6 @@ export default function ArtPieceDetailsPage() {
   const router = useRouter();
   const { slug } = router.query;
 
-  console.log("Current slug:", slug);
-
   const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
 
   if (!router.isReady) {

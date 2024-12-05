@@ -3,10 +3,7 @@ import useArtPiecesStore from "@/stores/useArtPiecesStore";
 
 const Comments = ({ slug }) => {
   const allComments = useArtPiecesStore((state) => state.comments);
-  console.log("All comments:", allComments);
-  console.log("Current slug:", slug);
   const comments = useMemo(() => {
-    console.log("Memoizing comments for slug:", slug);
     return allComments[slug] || [];
   }, [allComments, slug]);
 

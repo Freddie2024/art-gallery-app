@@ -83,26 +83,13 @@ const StyledButton = styled.button`
 `;
 
 export default function ArtPieceDetails({ onBack, slug }) {
-  console.log("Current slug in ArtPieceDetails:", slug);
   const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
   const favorites = useArtPiecesStore((state) => state.favorites);
   const toggleFavorite = useArtPiecesStore((state) => state.toggleFavorite);
-  // const store = useArtPiecesStore((state) => ({
-  //   artPiecesInfo: state.artPiecesInfo,
-  //   toggleFavorite: state.toggleFavorite,
-  //   addComment: state.addComment,
-  //   comments: state.comments,
-  //   favorites: state.favorites,
-  // }));
-
-  // const { artPiecesInfo, toggleFavorite, comments, favorites, addComment } =
-  //   store;
-
+  const addComment = useArtPiecesStore((state) => state.addComment);
   const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
 
-  useEffect(() => {
-    console.log("ArtPieceDetails re-rendered for slug:", slug);
-  }, [slug]);
+  useEffect(() => {}, [slug]);
 
   if (!artPiece) {
     console.error("Art piece not found for slug:", slug);

@@ -47,11 +47,6 @@ export default function Spotlight({ image, artist, slug }) {
   const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
   const toggleFavorite = useArtPiecesStore((state) => state.toggleFavorite);
 
-  // if (!Array.isArray(artPiecesInfo) || artPiecesInfo.length === 0) {
-  //   console.error("artPiecesInfo is not an array:", artPiecesInfo);
-
-  //   return <p>No art piece available</p>;
-  // }
   const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
   const isFavorite = artPiece ? artPiece.isFavorite : false;
 
@@ -68,9 +63,7 @@ export default function Spotlight({ image, artist, slug }) {
       </ImageContainer>
       <Artist>{artist}</Artist>
       <FavoriteButton
-        isFavorite={useArtPiecesStore((state) =>
-          state.favorites.includes(slug)
-        )}
+        isFavorite={isFavorite}
         onToggleFavorite={() => {
           toggleFavorite(slug);
         }}
