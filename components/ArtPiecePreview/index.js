@@ -54,7 +54,9 @@ const StyledLink = styled(Link)`
 `;
 
 export default function ArtPiecePreview({ image, name, artist, slug }) {
-  const { artPiecesInfo, toggleFavorite } = useArtPiecesStore();
+  const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
+  const toggleFavorite = useArtPiecesStore((state) => state.toggleFavorite);
+
   const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
   const isFavorite = artPiece ? artPiece.isFavorite : false;
 
@@ -76,7 +78,9 @@ export default function ArtPiecePreview({ image, name, artist, slug }) {
       </StyledLink>
       <FavoriteButton
         id={slug}
-        isFavorite={isFavorite}
+        isFavorite={useArtPiecesStore((state) =>
+          state.favorites.includes(slug)
+        )}
         onToggleFavorite={() => {
           toggleFavorite(slug);
         }}

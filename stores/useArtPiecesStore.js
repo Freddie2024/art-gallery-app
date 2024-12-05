@@ -1,44 +1,71 @@
 import { create } from "zustand";
-import { useEffect } from "react";
+import { persist } from "zustand/middleware";
 
-const useArtPiecesStore = create((set) => {
-  return {
-    artPiecesInfo: [],
-    favorites: [],
+const useArtPiecesStore = create(
+  persist(
+    (set) => ({
+      artPiecesInfo: [],
+      favorites: [],
+      comments: {},
 
-    setArtPiecesInfo: (newInfo) => set({ artPiecesInfo: newInfo }),
-    setFavorites: (newFavorites) => set({ favorites: newFavorites }),
+      setArtPiecesInfo: (newInfo) => {
+        set({ artPiecesInfo: newInfo });
+      },
+      // setFavorites: (newFavorites) => set({ favorites: newFavorites }),
 
-    toggleFavorite: (slug) =>
-      set((state) => {
-        const updatedInfo = state.artPiecesInfo.map((piece) =>
-          piece.slug === slug
-            ? { ...piece, isFavorite: !piece.isFavorite }
-            : piece
-        );
+      addComment: (slug, comment) => {
+        console.log("Adding comment for slug:", slug);
+        console.log("Comment to add:", comment);
+        set((state) => {
+          const existingComments = state.comments[slug] || [];
 
-        const isFavorite = state.favorites.includes(slug);
-        const updatedFavorites = isFavorite
-          ? state.favorites.filter((s) => s !== slug)
-          : [...state.favorites, slug];
+          console.log("Existing comments for slug:", slug, existingComments); // Log existing comments
 
-        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+          const updatedComments = {
+            ...state.comments,
+            [slug]: [...existingComments, comment],
+          };
 
-        return { artPiecesInfo: updatedInfo, favorites: updatedFavorites };
-      }),
-  };
-});
+          console.log(
+            "Updated comments for slug:",
+            slug,
+            updatedComments[slug]
+          );
 
-export const useLoadFavorites = () => {
-  const setFavorites = useArtPiecesStore((state) => state.setFavorites);
+          return {
+            comments: updatedComments,
+          };
+        });
+      },
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedFavorites =
-        JSON.parse(localStorage.getItem("favorites")) || [];
-      setFavorites(storedFavorites);
+      toggleFavorite: (slug) =>
+        set((state) => {
+          console.log("Toggling favorite for:", slug);
+          const isFavorite = state.favorites.includes(slug);
+          const updatedFavorites = isFavorite
+            ? state.favorites.filter((s) => s !== slug)
+            : [...state.favorites, slug];
+          console.log("Updated favorites:", updatedFavorites);
+          return { favorites: updatedFavorites };
+        }),
+    }),
+    {
+      name: "art-pieces-store",
+      partialize: (state) => ({ favorites: state.favorites }),
     }
-  }, [setFavorites]);
-};
+  )
+);
+
+// export const useLoadFavorites = () => {
+//   const setFavorites = useArtPiecesStore((state) => state.setFavorites);
+
+//   useEffect(() => {
+//     if (typeof window !== "undefined") {
+//       const storedFavorites =
+//         JSON.parse(localStorage.getItem("favorites")) || [];
+//       setFavorites(storedFavorites);
+//     }
+//   }, [setFavorites]);
+// };
 
 export default useArtPiecesStore;

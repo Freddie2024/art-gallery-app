@@ -2,7 +2,7 @@ import ArtPieces from "@/components/ArtPieces";
 import useArtPiecesStore from "@/stores/useArtPiecesStore";
 
 export default function ArtPiecesPage() {
-  const { artPiecesInfo } = useArtPiecesStore();
+  const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
 
   return (
     <>
