@@ -15,7 +15,6 @@ const useArtPiecesStore = create(
       addComment: (slug, comment) => {
         set((state) => {
           const existingComments = state.comments[slug] || [];
-
           const updatedComments = {
             ...state.comments,
             [slug]: [...existingComments, comment],
@@ -38,7 +37,10 @@ const useArtPiecesStore = create(
     }),
     {
       name: "art-pieces-store",
-      partialize: (state) => ({ favorites: state.favorites }),
+      partialize: (state) => ({
+        favorites: state.favorites,
+        comments: state.comments,
+      }),
     }
   )
 );

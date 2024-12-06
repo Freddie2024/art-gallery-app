@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import useArtPiecesStore from "@/stores/useArtPiecesStore";
 
 const StyledButton = styled.button`
   position: relative;
-  padding: 10px 20px;
+  padding: 10px;
   font-size: 16px;
   color: #333;
   text-decoration: none;
@@ -14,10 +15,21 @@ const StyledButton = styled.button`
   background-color: #ffffff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  margin-top: 10px;
+  width: auto;
+  max-width: 80px;
 
   &:hover {
     background-color: lightgrey;
   }
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 `;
 
 const CommentForm = ({ onSubmitComment }) => {
@@ -36,8 +48,11 @@ const CommentForm = ({ onSubmitComment }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form
+      onSubmit={handleSubmit}
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <StyledInput
         type="text"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
