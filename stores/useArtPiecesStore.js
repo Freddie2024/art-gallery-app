@@ -7,6 +7,7 @@ const useArtPiecesStore = create(
       artPiecesInfo: [],
       favorites: [],
       comments: {},
+      isFirstVisit: true,
 
       setArtPiecesInfo: (newInfo) => {
         set({ artPiecesInfo: newInfo });
@@ -34,7 +35,13 @@ const useArtPiecesStore = create(
             : [...state.favorites, slug];
           return { favorites: updatedFavorites };
         }),
+
+      setFirstVisit: (value) =>
+        set(() => ({
+          isFirstVisit: value,
+        })),
     }),
+
     {
       name: "art-pieces-store",
       partialize: (state) => ({

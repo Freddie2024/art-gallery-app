@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
@@ -87,6 +88,7 @@ const ColorBar = styled.div`
   justify-content: space-between;
   width: 100%;
   margin: 10px 0;
+  max-width: 300px;
 `;
 
 const ColorSquare = styled.div`
@@ -96,7 +98,10 @@ const ColorSquare = styled.div`
   border: 1px solid #ccc;
 `;
 
-export default function SpotlightPage({ onBack, slug }) {
+export default function SpotlightPage({ slug }) {
+  const router = useRouter();
+  const isFirstVisit = useArtPiecesStore((state) => state.isFirstVisit);
+  const setFirstVisit = useArtPiecesStore((state) => state.setFirstVisit);
   const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
   const favorites = useArtPiecesStore((state) => state.favorites);
   const toggleFavorite = useArtPiecesStore((state) => state.toggleFavorite);
@@ -105,12 +110,21 @@ export default function SpotlightPage({ onBack, slug }) {
 
   useEffect(() => {}, [slug]);
 
-  if (!artPiece) {
-    console.error("Art piece not found for slug:", slug);
-    return <p>No art piece found.</p>;
-  }
+  useEffect(() => {
+    if (isFirstVisit) {
+      setFirstVisit(false);
+    }
+  }, [isFirstVisit, setFirstVisit]);
 
   const isFavorite = favorites.includes(slug);
+
+  const handleBackClick = () => {
+    if (isFirstVisit) {
+      router.push("/art-pieces");
+    } else {
+      router.back();
+    }
+  };
 
   const handleSubmitComment = (newComment) => {
     addComment(slug, newComment);
@@ -125,7 +139,6 @@ export default function SpotlightPage({ onBack, slug }) {
           fill
           priority
           sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
-          style={{ objectFit: "contain" }}
         />
       </ImageContainer>
       <Title>{artPiece.name}</Title>
@@ -146,8 +159,14 @@ export default function SpotlightPage({ onBack, slug }) {
           ))}
       </ColorBar>
 
-      <StyledButton type="button" onClick={onBack} aria-label="navigate back">
-        Back
+      <StyledButton
+        type="button"
+        onClick={handleBackClick}
+        aria-label={
+          isFirstVisit ? "Show all art pieces" : "Go back to previous page"
+        }
+      >
+        {isFirstVisit ? "Show All" : "Back"}
       </StyledButton>
       <Comments slug={slug} />
       <CommentForm onSubmitComment={handleSubmitComment} />
