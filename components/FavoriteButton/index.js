@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledImage = styled.img`
   width: 30px;
   height: 30px;
+  margin: 10px;
   cursor: pointer;
   transition: opacity 0.3s ease;
 

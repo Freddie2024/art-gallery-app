@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
@@ -10,7 +9,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  width: 320px;
   height: 100%;
   padding: 20px;
   border: 1px solid #ccc;
@@ -22,9 +21,6 @@ const ImageContainer = styled.div`
   width: 300px;
   height: 300px;
   position: relative;
-  border: 1px solid #ccc;
-  background-color: white;
-  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,11 +50,11 @@ const StyledLink = styled(Link)`
 `;
 
 export default function ArtPiecePreview({ image, name, artist, slug }) {
-  const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
+  // const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
   const toggleFavorite = useArtPiecesStore((state) => state.toggleFavorite);
 
-  const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
-  const isFavorite = artPiece ? artPiece.isFavorite : false;
+  // const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
+  // const isFavorite = artPiece ? artPiece.isFavorite : false;
 
   return (
     <Wrapper>
