@@ -9,12 +9,21 @@ const CommentsList = styled.ul`
 `;
 
 const CommentItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 5px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
   font-size: 14px;
+  min-width: 300px;
+`;
+
+const CommentDate = styled.small`
+  margin-left: 5px;
+  align-self: flex-end;
 `;
 
 const Comments = ({ slug }) => {
@@ -35,7 +44,7 @@ const Comments = ({ slug }) => {
         comments.map((comment, index) => (
           <CommentItem key={index}>
             <p>{comment.text}</p>
-            <small>{comment.date}</small>
+            <CommentDate>{comment.date}</CommentDate>
           </CommentItem>
         ))
       )}

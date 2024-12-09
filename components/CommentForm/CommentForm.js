@@ -30,6 +30,12 @@ const StyledInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: #666;
+    box-shadow: 0 0 5px rgba(102, 102, 102, 0.5);
+  }
 `;
 
 const CommentForm = ({ onSubmitComment }) => {

@@ -82,6 +82,20 @@ const StyledButton = styled.button`
   }
 `;
 
+const ColorBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px 0;
+`;
+
+const ColorSquare = styled.div`
+  width: 20%;
+  height: 30px;
+  background-color: ${(props) => props.color};
+  border: 1px solid #ccc;
+`;
+
 export default function ArtPieceDetails({ onBack, slug }) {
   const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
   const favorites = useArtPiecesStore((state) => state.favorites);
@@ -124,6 +138,14 @@ export default function ArtPieceDetails({ onBack, slug }) {
           toggleFavorite(slug);
         }}
       />
+      <p>Color Palette: </p>
+      <ColorBar>
+        {artPiece.colors &&
+          artPiece.colors.map((color, index) => (
+            <ColorSquare key={index} color={color} />
+          ))}
+      </ColorBar>
+
       <StyledButton type="button" onClick={onBack} aria-label="navigate back">
         Back
       </StyledButton>
