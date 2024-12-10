@@ -56,13 +56,7 @@ export default React.memo(function ArtPiecePreview({
   artist,
   slug,
 }) {
-  console.log("ArtPiecePreview props:", { image, name, artist, slug });
-
-  // const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
   const toggleFavorite = useArtPiecesStore((state) => state.toggleFavorite);
-
-  // const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
-  // const isFavorite = artPiece ? artPiece.isFavorite : false;
 
   return (
     <Wrapper>
