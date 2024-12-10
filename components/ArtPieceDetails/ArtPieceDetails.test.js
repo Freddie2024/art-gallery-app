@@ -34,7 +34,7 @@ describe("ArtPieceDetails", () => {
     );
   });
 
-  test("renders ArtPieceDetails with image, title, artist, year, genre, and back-button", () => {
+  test("renders ArtPieceDetails with image, title, artist, year, genre, back-button and color palette", () => {
     render(<ArtPieceDetails slug="clay-bust-sculptures" onBack={jest.fn()} />);
 
     const image = screen.getByAltText("Clay Bust Sculptures");
@@ -47,5 +47,12 @@ describe("ArtPieceDetails", () => {
 
     const button = screen.getByRole("button", { name: /back/i });
     expect(button).toBeInTheDocument();
+
+    const colorPalette = mockArtPieces[0].colors;
+    colorPalette.forEach((color) => {
+      const colorSquare = screen.getByTestId(`color-square-${color}`);
+      expect(colorSquare).toBeInTheDocument();
+      expect(colorSquare).toHaveStyle(`background-color: ${color}`);
+    });
   });
 });

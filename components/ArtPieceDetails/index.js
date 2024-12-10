@@ -142,7 +142,11 @@ export default function ArtPieceDetails({ onBack, slug }) {
       <ColorBar>
         {artPiece.colors &&
           artPiece.colors.map((color, index) => (
-            <ColorSquare key={index} color={color} />
+            <ColorSquare
+              key={index}
+              color={color}
+              data-testid={`color-square-${color}`}
+            />
           ))}
       </ColorBar>
 
