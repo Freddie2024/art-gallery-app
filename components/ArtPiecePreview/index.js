@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
@@ -49,7 +50,14 @@ const StyledLink = styled(Link)`
   display: inline-block;
 `;
 
-export default function ArtPiecePreview({ image, name, artist, slug }) {
+export default React.memo(function ArtPiecePreview({
+  image,
+  name,
+  artist,
+  slug,
+}) {
+  console.log("ArtPiecePreview props:", { image, name, artist, slug });
+
   // const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
   const toggleFavorite = useArtPiecesStore((state) => state.toggleFavorite);
 
@@ -83,4 +91,4 @@ export default function ArtPiecePreview({ image, name, artist, slug }) {
       />
     </Wrapper>
   );
-}
+});

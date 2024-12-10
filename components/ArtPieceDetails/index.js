@@ -4,7 +4,7 @@ import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
 import Comments from "../Comments/Comments";
 import CommentForm from "../CommentForm/CommentForm";
-import useArtPiecesStore from "@/stores/useArtPiecesStore";
+import useArtPiecesStore from "../../stores/useArtPiecesStore";
 
 const Container = styled.div`
   display: flex;
@@ -26,7 +26,6 @@ const ImageContainer = styled.div`
   width: 100%;
   height: 400px;
   position: relative;
-  /* border: 1px solid #ccc; */
   background-color: white;
   padding: 10px;
   display: flex;
@@ -101,6 +100,7 @@ export default function ArtPieceDetails({ onBack, slug }) {
   const favorites = useArtPiecesStore((state) => state.favorites);
   const toggleFavorite = useArtPiecesStore((state) => state.toggleFavorite);
   const addComment = useArtPiecesStore((state) => state.addComment);
+
   const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
 
   useEffect(() => {}, [slug]);
@@ -142,7 +142,11 @@ export default function ArtPieceDetails({ onBack, slug }) {
       <ColorBar>
         {artPiece.colors &&
           artPiece.colors.map((color, index) => (
-            <ColorSquare key={index} color={color} />
+            <ColorSquare
+              key={index}
+              color={color}
+              data-testid={`color-square-${color}`}
+            />
           ))}
       </ColorBar>
 

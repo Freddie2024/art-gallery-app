@@ -1,29 +1,58 @@
-import { render } from "@testing-library/react";
-import ArtPieceDetails from ".";
+import { render, screen } from "@testing-library/react";
+import ArtPieceDetails from "./index";
+import useArtPiecesStore from "../../stores/useArtPiecesStore";
 
-test('renders ArtPieceDetails with image, title, artist, year, genre and back-button', () => {
+jest.mock("../../stores/useArtPiecesStore");
 
-const onBack = jest.fn();
+const mockArtPieces = [
+  {
+    slug: "clay-bust-sculptures",
+    name: "Clay Bust Sculptures",
+    artist: "Dilara Irem",
+    year: "2022",
+    genre: "Classics",
+    imageSource:
+      "https://example-apis.vercel.app/assets/art/clay-bust-sculptures.jpg",
+    colors: ["#ffffff", "#000000"],
+  },
+];
 
-const { getByAltText, getByText, getByRole } = render(
-    <ArtPieceDetails
-      image="https://example-apis.vercel.app/assets/art/clay-bust-sculptures.jpg" 
-      name="Clay Bust Sculptures" 
-      artist="dilara irem"
-      year="2022"
-      genre="Classics"
-      onBack={onBack} 
-    />
-  );
+describe("ArtPieceDetails", () => {
+  beforeEach(() => {
+    useArtPiecesStore.mockImplementation((selector) =>
+      selector({
+        artPiecesInfo: mockArtPieces,
+        favorites: [],
+        toggleFavorite: jest.fn(),
+        addComment: jest.fn(),
+        comments: {
+          "clay-bust-sculptures": [
+            { text: "Amazing art!", date: "2024-12-01" },
+          ],
+        },
+      })
+    );
+  });
 
-  const image = getByAltText('Clay Bust Sculptures');
-  expect(image).toBeInTheDocument(); 
+  test("renders ArtPieceDetails with image, title, artist, year, genre, back-button and color palette", () => {
+    render(<ArtPieceDetails slug="clay-bust-sculptures" onBack={jest.fn()} />);
 
-  expect(getByText('Clay Bust Sculptures')).toBeInTheDocument();
-  expect(getByText('dilara irem')).toBeInTheDocument();
-  expect(getByText('2022')).toBeInTheDocument();
-  expect(getByText('Classics')).toBeInTheDocument();
+    const image = screen.getByAltText("Clay Bust Sculptures");
+    expect(image).toBeInTheDocument();
 
-  const button = getByRole('button', {name: /back/i});
-  expect(button).toBeInTheDocument();
+    expect(screen.getByText("Clay Bust Sculptures")).toBeInTheDocument();
+    expect(screen.getByText(/Dilara Irem/i)).toBeInTheDocument();
+    expect(screen.getByText("2022")).toBeInTheDocument();
+    expect(screen.getByText("Classics")).toBeInTheDocument();
+
+    const button = screen.getByRole("button", { name: /back/i });
+    expect(button).toBeInTheDocument();
+
+    const colorPalette = mockArtPieces[0].colors;
+    colorPalette.forEach((color) => {
+      const colorSquare = screen.getByTestId(`color-square-${color}`);
+      expect(colorSquare).toBeInTheDocument();
+      expect(colorSquare).toHaveStyle(`background-color: ${color}`);
+    });
+  });
 });

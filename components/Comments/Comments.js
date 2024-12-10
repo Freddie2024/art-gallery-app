@@ -29,7 +29,7 @@ const CommentDate = styled.small`
 const Comments = ({ slug }) => {
   const allComments = useArtPiecesStore((state) => state.comments);
   const comments = useMemo(() => {
-    return allComments[slug] || [];
+    return allComments?.[slug] || [];
   }, [allComments, slug]);
 
   if (!slug) {
