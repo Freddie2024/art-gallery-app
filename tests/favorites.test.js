@@ -1,7 +1,6 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import FavoritesPage from "../pages/favorites";
-import useArtPiecesStore from "../stores/useArtPiecesStore";
-import FavoriteButton from "../components/FavoriteButton";
+import useArtPiecesStore from "@/stores/useArtPiecesStore";
 
 jest.mock("../stores/useArtPiecesStore");
 
@@ -15,9 +14,9 @@ jest.mock("../components/FavoriteButton", () => {
   };
 });
 
-describe("FavoritesPage", () => {
-  test("renders a list of all favorite art pieces, where each image, title and artist and active favorite-button is displayed", () => {
-    useArtPiecesStore.mockReturnValue({
+jest.mock("../stores/useArtPiecesStore", () => {
+  return jest.fn((selector) =>
+    selector({
       artPiecesInfo: [
         {
           slug: "clay-bust-sculptures",
@@ -29,17 +28,41 @@ describe("FavoritesPage", () => {
         },
       ],
       favorites: ["clay-bust-sculptures"],
-    });
+    })
+  );
+});
 
-    const { getByAltText, getByText, getByRole } = render(<FavoritesPage />);
+describe("FavoritesPage", () => {
+  beforeEach(() => {
+    useArtPiecesStore.mockImplementation((selector) =>
+      selector({
+        artPiecesInfo: [
+          {
+            slug: "clay-bust-sculptures",
+            imageSource:
+              "https://example-apis.vercel.app/assets/art/clay-bust-sculptures.jpg",
+            name: "Clay Bust Sculptures",
+            artist: "dilara irem",
+            isFavorite: true,
+          },
+        ],
+        favorites: ["clay-bust-sculptures"],
+      })
+    );
+  });
 
-    const image = getByAltText("Clay Bust Sculptures");
+  test("renders a list of all favorite art pieces, where each image, title and artist and active favorite-button is displayed", () => {
+    render(<FavoritesPage />);
+
+    const image = screen.getByAltText("Clay Bust Sculptures");
     expect(image).toBeInTheDocument();
 
-    expect(getByText("Clay Bust Sculptures")).toBeInTheDocument();
-    expect(getByText("dilara irem")).toBeInTheDocument();
+    expect(screen.getByText("Clay Bust Sculptures")).toBeInTheDocument();
+    expect(screen.getByText("dilara irem")).toBeInTheDocument();
 
-    const button = getByRole("button", { name: /remove from favorites/i });
+    const button = screen.getByRole("button", {
+      name: /remove from favorites/i,
+    });
     expect(button).toBeInTheDocument();
   });
 });

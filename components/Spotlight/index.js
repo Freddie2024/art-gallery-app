@@ -116,6 +116,11 @@ export default function SpotlightPage({ slug }) {
     }
   }, [isFirstVisit, setFirstVisit]);
 
+  if (!artPiece) {
+    console.error("Art piece not found for slug:", slug);
+    return <p>No art piece found.</p>;
+  }
+
   const isFavorite = favorites.includes(slug);
 
   const handleBackClick = () => {

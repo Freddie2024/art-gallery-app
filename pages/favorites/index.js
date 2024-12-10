@@ -5,6 +5,9 @@ export default function FavoritesPage() {
   const artPiecesInfo = useArtPiecesStore((state) => state.artPiecesInfo);
   const favorites = useArtPiecesStore((state) => state.favorites);
 
+  console.log("artPiecesInfo:", artPiecesInfo);
+  console.log("favorites:", favorites);
+
   if (!Array.isArray(artPiecesInfo) || !Array.isArray(favorites)) {
     console.error("Invalid data in store:", { artPiecesInfo, favorites });
     return <p>Error: Unable to load your favorite art pieces.</p>;
