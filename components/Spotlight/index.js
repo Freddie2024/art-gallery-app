@@ -143,6 +143,7 @@ export default function SpotlightPage({ slug }) {
           fill
           priority
           sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
+          style={{ objectFit: "contain" }}
         />
       </ImageContainer>
       <Title>{artPiece.name}</Title>
