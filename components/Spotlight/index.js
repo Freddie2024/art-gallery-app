@@ -12,7 +12,9 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  max-width: 90%;
+  width: 90%;
+  max-width: 500px;
+  min-height: 600px;
   margin: 20px auto;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -25,7 +27,8 @@ const Container = styled.div`
 
 const ImageContainer = styled.div`
   width: 100%;
-  height: 400px;
+  max-width: 400px;
+  height: auto;
   position: relative;
   background-color: white;
   padding: 10px;
@@ -36,13 +39,12 @@ const ImageContainer = styled.div`
 
 const StyledImage = styled(Image)`
   object-fit: contain;
-  width: 100%;
-  height: 100%;
 `;
 
 const Title = styled.h3`
   margin: 20px 0 0;
   text-align: center;
+  height: 50px;
 `;
 
 const Artist = styled.p`
@@ -140,10 +142,10 @@ export default function SpotlightPage({ slug }) {
         <StyledImage
           src={artPiece.imageSource}
           alt={artPiece.name}
-          fill
+          layout="responsive"
+          width={400}
+          height={400}
           priority
-          sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
-          style={{ objectFit: "contain" }}
         />
       </ImageContainer>
       <Title>{artPiece.name}</Title>
