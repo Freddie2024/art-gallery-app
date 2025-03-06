@@ -1,5 +1,9 @@
 # Spiced-Academy - Web Dev - Recap Project 5: Art Gallery App
 
+Entwickelt mit React und Next.js, unter Verwendung von Zustand für das State-Management und Komponententests. User können sich über eine intuitive Benutzeroberfläche Kunstwerke ansehen, Favoriten markieren und Kommentare hinterlassen.
+
+
+
 In this recap project you will create an art gallery app.
 
 There is an API that provides you with all art pieces to show in the gallery:
